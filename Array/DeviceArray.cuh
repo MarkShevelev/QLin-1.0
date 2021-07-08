@@ -6,7 +6,7 @@ namespace iki { namespace device {
     template<size_t Dim>
     inline
     __device__ size_t get_shift_rec(size_t *ixs, size_t *collapse, size_t shift) {
-        return get_shift<Dim - 1>(ixs, collapse, shift + ixs[Dim - 1] * collapse[Dim - 1]);
+        return get_shift_rec<Dim - 1>(ixs, collapse, shift + ixs[Dim - 1] * collapse[Dim - 1]);
     }
 
     template<>
