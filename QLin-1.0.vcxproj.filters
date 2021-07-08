@@ -7,6 +7,9 @@
     <Filter Include="Device">
       <UniqueIdentifier>{3ef0c045-2148-4708-9cf3-7867d5909e70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Array\Test">
+      <UniqueIdentifier>{38380ad6-bd7e-4f53-83ea-ed310fb75ea4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Device\Device.cpp">
@@ -32,5 +35,10 @@
     <ClInclude Include="Array\DeviceArray.cuh">
       <Filter>Array</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="Array\Test\ArrayTest.cu">
+      <Filter>Array\Test</Filter>
+    </CudaCompile>
   </ItemGroup>
 </Project>
