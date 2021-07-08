@@ -29,5 +29,8 @@
     <ClInclude Include="Device\DeviceMemory.h">
       <Filter>Device</Filter>
     </ClInclude>
+    <ClInclude Include="Array\DeviceArray.cuh">
+      <Filter>Array</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
