@@ -32,5 +32,8 @@
     <ClInclude Include="Array\DeviceArray.cuh">
       <Filter>Array</Filter>
     </ClInclude>
+    <ClInclude Include="Array\HostManagedDeviceArray.cuh">
+      <Filter>Array</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -17,6 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Array\DeviceArray.cuh" />
+    <ClInclude Include="Array\HostManagedDeviceArray.cuh" />
     <ClInclude Include="Device\Device.h" />
     <ClInclude Include="Device\DeviceError.h" />
     <ClInclude Include="Device\DeviceMemory.h" />
