@@ -3,7 +3,7 @@
 namespace iki { namespace device {
 	class DeviceMemory final {
 	public:
-		DeviceMemory(unsigned byte_size);
+		DeviceMemory(size_t byte_size);
 
 		DeviceMemory(DeviceMemory const &src);
 		DeviceMemory(DeviceMemory &&src);
@@ -27,6 +27,6 @@ namespace iki { namespace device {
 
 	private:
 		void *device_ptr;
-		unsigned byte_size;
+		size_t byte_size;
 	};
 } /*device*/ } /*iki*/

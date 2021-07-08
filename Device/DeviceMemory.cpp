@@ -8,7 +8,7 @@
 using namespace std;
 
 namespace iki { namespace device {
-	DeviceMemory::DeviceMemory(unsigned byte_size) : device_ptr(nullptr), byte_size(byte_size) {
+	DeviceMemory::DeviceMemory(size_t byte_size) : device_ptr(nullptr), byte_size(byte_size) {
 		cudaError_t cudaStatus;
 		if (cudaSuccess != (cudaStatus = cudaMalloc(&device_ptr, byte_size)))
 			throw DeviceError("Can't allocate memory: ", cudaStatus);
