@@ -27,7 +27,7 @@ namespace iki { namespace device {
 
     public:
         template <typename... Shape>
-        HostManagedArray(Shape... shape): device_memory(sizeof(T) * collapse_shape(shape) + 2 * Dim * sizeof(size_t)) {
+        HostManagedArray(Shape... shape): device_memory(sizeof(T) * collapse_shape(shape...) + 2 * Dim * sizeof(size_t)) {
             static_assert(sizeof...(shape) == Dim, "Number of arguments is not equal to the array dimension");
             size_t tmp[Dim] = {shape...};
             host_shape[0] = tmp[0];
@@ -39,13 +39,13 @@ namespace iki { namespace device {
 
             {//copy shape
                 cudaError_t cudaStatus;
-                if (cudaSuccess != (cudaStatus = cudaMemcpy(device_memory.as<size_t>(), host_shape, Dim * sizeof(size_t), cudaMemcpyHostToDevice)))
+                if (cudaSuccess != (cudaStatus = cudaMemcpy(device_memory.as<size_t>(), host_shape.data(), Dim * sizeof(size_t), cudaMemcpyHostToDevice)))
                     throw DeviceError("Can't copy from host to device memory: ", cudaStatus);
             }
 
             {//copy collapse
                 cudaError_t cudaStatus;
-                if (cudaSuccess != (cudaStatus = cudaMemcpy(device_memory.as<size_t>() + Dim, host_collapse, Dim * sizeof(size_t), cudaMemcpyHostToDevice)))
+                if (cudaSuccess != (cudaStatus = cudaMemcpy(device_memory.as<size_t>() + Dim, host_collapse.data(), Dim * sizeof(size_t), cudaMemcpyHostToDevice)))
                     throw DeviceError("Can't copy from host to device memory: ", cudaStatus);
             }
         }
