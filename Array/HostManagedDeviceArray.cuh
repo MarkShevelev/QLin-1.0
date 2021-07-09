@@ -29,7 +29,7 @@ namespace iki { namespace device {
         template <typename... Shape>
         HostManagedArray(Shape... shape): device_memory(sizeof(T) * collapse_shape(shape) + 2 * Dim * sizeof(size_t)) {
             static_assert(sizeof...(shape) == Dim, "Number of arguments is not equal to the array dimension");
-            size_t tmp[Dim] = { shape };
+            size_t tmp[Dim] = {shape...};
             host_shape[0] = tmp[0];
             host_collapse[Dim - 1u] = 1u;
             for (size_t idx = 1u; idx != Dim; ++idx) {
