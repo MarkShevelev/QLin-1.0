@@ -13,21 +13,21 @@ namespace iki { namespace device {
         std::array<size_t,Dim> host_shape;
         std::array<size_t, Dim> host_collapse;
         
-        template<typename... Shape>
+        template<typename T, typename... Shape>
         inline
-        static size_t collapse_shape(size_t size, Shape... shape) {
-            return size * collapse_shape(shape);
+        static T collapse_shape(T size, Shape... shape) {
+            return size * collapse_shape(shape...);
         }
 
-        template<>
+        template<typename T>
         inline
-        static size_t collapse_shape(size_t size) {
+        static T collapse_shape(T size) {
             return size;
         }
 
     public:
         template <typename... Shape>
-        HostManagedArray(Shape... shape): device_memory(sizeof(T) * collapse_shape(shape...) + 2 * Dim * sizeof(size_t)) {
+        HostManagedArray(Shape... shape): device_memory(sizeof(T) * collapse_shape<size_t>(shape...) + 2 * Dim * sizeof(size_t)) {
             static_assert(sizeof...(shape) == Dim, "Number of arguments is not equal to the array dimension");
             size_t tmp[Dim] = {shape...};
             host_shape[0] = tmp[0];
