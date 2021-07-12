@@ -16,7 +16,7 @@ namespace iki { namespace device {
        
         template<typename T, typename... Shape>
         inline
-        static T collapse_shape(T size, Shape... shape) {
+        static T full_size_calc(T size, Shape... shape) {
             return size * full_size_calc(shape...);
         }
 
