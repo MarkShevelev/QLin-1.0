@@ -9,7 +9,7 @@ namespace iki { namespace device {
     template <typename T, size_t Dim>
     class HostManagedArray final {
     private:
-        size_t full_size;
+        size_t const full_size;
         std::array<size_t, Dim> host_shape;
         std::array<size_t, Dim> host_collapse;
         device::DeviceMemory device_memory;
@@ -28,15 +28,11 @@ namespace iki { namespace device {
 
     public:
         template <typename... Shape>
-        HostManagedArray(Shape... shape): full_size(full_size_calc<size_t>(shape...)), device_memory(2 * Dim * sizeof(size_t) + full_size * sizeof(T)) {
+        HostManagedArray(Shape... shape) : full_size(full_size_calc<size_t>(shape...)), host_shape({ shape... }), device_memory(2 * Dim * sizeof(size_t) + full_size * sizeof(T)) {
             static_assert(sizeof...(shape) == Dim, "Number of arguments is not equal to the array dimension");
-            size_t tmp[Dim] = {shape...};
-            host_shape[0] = tmp[0];
             host_collapse[Dim - 1u] = 1u;
-            for (size_t idx = 1u; idx != Dim; ++idx) {
-                host_shape[idx] = tmp[idx];
-                host_collapse[Dim - idx - 1u] = tmp[Dim - idx] * host_collapse[Dim - idx];
-            }
+            for (size_t idx = 1u; idx != Dim; ++idx)
+                host_collapse[Dim - idx - 1u] = host_shape[Dim - idx] * host_collapse[Dim - idx];
 
             {//copy shape
                 cudaError_t cudaStatus;
