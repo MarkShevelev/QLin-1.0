@@ -34,7 +34,7 @@ namespace iki { namespace device {
             host_collapse[Dim - 1u] = 1u;
             for (size_t idx = 1u; idx != Dim; ++idx) {
                 host_shape[idx] = tmp[idx];
-                host_collapse[Dim - idx - 1u] = tmp[idx] * host_collapse[Dim - idx];
+                host_collapse[Dim - idx - 1u] = tmp[Dim - idx] * host_collapse[Dim - idx];
             }
 
             {//copy shape
