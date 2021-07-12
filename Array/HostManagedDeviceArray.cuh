@@ -9,25 +9,26 @@ namespace iki { namespace device {
     template <typename T, size_t Dim>
     class HostManagedArray final {
     private:
-        device::DeviceMemory device_memory;
-        std::array<size_t,Dim> host_shape;
+        size_t full_size;
+        std::array<size_t, Dim> host_shape;
         std::array<size_t, Dim> host_collapse;
-        
+        device::DeviceMemory device_memory;
+       
         template<typename T, typename... Shape>
         inline
         static T collapse_shape(T size, Shape... shape) {
-            return size * collapse_shape(shape...);
+            return size * full_size_calc(shape...);
         }
 
         template<typename T>
         inline
-        static T collapse_shape(T size) {
+        static T full_size_calc(T size) {
             return size;
         }
 
     public:
         template <typename... Shape>
-        HostManagedArray(Shape... shape): device_memory(sizeof(T) * collapse_shape<size_t>(shape...) + 2 * Dim * sizeof(size_t)) {
+        HostManagedArray(Shape... shape): full_size(full_size_calc<size_t>(shape...)), device_memory(2 * Dim * sizeof(size_t) + full_size * sizeof(T)) {
             static_assert(sizeof...(shape) == Dim, "Number of arguments is not equal to the array dimension");
             size_t tmp[Dim] = {shape...};
             host_shape[0] = tmp[0];
@@ -60,6 +61,10 @@ namespace iki { namespace device {
 
         std::array<size_t, Dim> get_collapse() const {
             return host_collapse;
+        }
+
+        size_t get_full_size() const {
+            return full_size;
         }
     };
 } /*device*/ } /*iki*/
