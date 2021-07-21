@@ -118,14 +118,55 @@ namespace iki {
             return host_memory.data();
         }
 
-        template<typename... Ixs_t>
         T operator()(size_t Ixs) const {
             return data[Ixs];
         }
 
-        template<typename... Ixs_t>
         T& operator()(size_t Ixs) {
             return data[Ixs];
+        }
+    };
+
+    template <typename T>
+    class HostArray<T, 2u> final {
+    private:
+        size_t const full_size;
+        std::array<size_t, 2u> shape;
+        std::array<size_t, 2u> collapse;
+        std::vector<T> host_memory;
+
+    public:
+        HostArray(size_t y_size, size_t x_size) : full_size(y_size * x_size), shape({ y_size, x_size }), host_memory(x_size * y_size) {
+            collapse[0] = 1u;
+            collapse[1] = x_size;
+        }
+
+        std::array<size_t, 2u> get_shape() const {
+            return shape;
+        }
+
+        std::array<size_t, 2u> get_collapse() const {
+            return collapse;
+        }
+
+        size_t get_full_size() const {
+            return full_size;
+        }
+
+        T const *data() const {
+            return host_memory.data();
+        }
+
+        T *data() {
+            return host_memory.data();
+        }
+
+        T operator()(size_t y_idx, size_t x_idx) const {
+            return data[y_idx * x_size + x_idx];
+        }
+
+        T &operator()(size_t y_idx, size_t x_idx) {
+            return data[y_idx * x_size + x_idx];
         }
     };
 }/*iki*/
