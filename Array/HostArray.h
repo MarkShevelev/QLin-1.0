@@ -138,8 +138,8 @@ namespace iki {
 
     public:
         HostArray(size_t y_size, size_t x_size) : full_size(y_size * x_size), shape({ y_size, x_size }), host_memory(x_size * y_size) {
-            collapse[0] = 1u;
-            collapse[1] = x_size;
+            collapse[0] = x_size;
+            collapse[1] = 1u;
         }
 
         std::array<size_t, 2u> get_shape() const {
@@ -163,11 +163,11 @@ namespace iki {
         }
 
         T operator()(size_t y_idx, size_t x_idx) const {
-            return host_memory[y_idx * x_size + x_idx];
+            return host_memory[y_idx * shape[1] + x_idx];
         }
 
         T &operator()(size_t y_idx, size_t x_idx) {
-            return host_memory[y_idx * x_size + x_idx];
+            return host_memory[y_idx * shape[1] + x_idx];
         }
     };
 }/*iki*/
