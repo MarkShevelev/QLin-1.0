@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <array>
 
 namespace iki {
 	template <typename T, size_t Dim>
@@ -74,14 +75,14 @@ namespace iki {
         T operator()(Ixs_t ... Ixs) const {
             static_assert(sizeof...(Ixs) == Dim, "Number of indexes is not equal to the array dimension");
             size_t ixs[Dim] = { Ixs... };
-            return data[get_shift<Dim>(ixs, collapse)];
+            return host_memory[get_shift<Dim>(ixs, collapse)];
         }
 
         template<typename... Ixs_t>
         T &operator()(Ixs_t ... Ixs) {
             static_assert(sizeof...(Ixs) == Dim, "Number of indexes is not equal to the array dimension");
             size_t ixs[Dim] = { Ixs... };
-            return data[get_shift<Dim>(ixs, collapse)];
+            return host_memory[get_shift<Dim>(ixs, collapse)];
         }
 	};
 
@@ -119,11 +120,11 @@ namespace iki {
         }
 
         T operator()(size_t Ixs) const {
-            return data[Ixs];
+            return host_memory[Ixs];
         }
 
         T& operator()(size_t Ixs) {
-            return data[Ixs];
+            return host_memory[Ixs];
         }
     };
 
@@ -162,11 +163,11 @@ namespace iki {
         }
 
         T operator()(size_t y_idx, size_t x_idx) const {
-            return data[y_idx * x_size + x_idx];
+            return host_memory[y_idx * x_size + x_idx];
         }
 
         T &operator()(size_t y_idx, size_t x_idx) {
-            return data[y_idx * x_size + x_idx];
+            return host_memory[y_idx * x_size + x_idx];
         }
     };
 }/*iki*/
