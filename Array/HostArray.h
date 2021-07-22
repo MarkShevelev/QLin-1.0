@@ -48,15 +48,15 @@ namespace iki {
             static_assert(sizeof...(shape) == Dim, "Number of arguments is not equal to the array dimension");
             collapse[Dim - 1u] = 1u;
             for (size_t idx = 1u; idx != Dim; ++idx)
-                collapse[Dim - idx - 1u] = shape[Dim - idx] * collapse[Dim - idx];
+                collapse[Dim - idx - 1u] = this->shape[Dim - idx] * collapse[Dim - idx];
         }
 
         std::array<size_t, Dim> get_shape() const {
-            return host_shape;
+            return shape;
         }
 
         std::array<size_t, Dim> get_collapse() const {
-            return host_collapse;
+            return collapse;
         }
 
         size_t get_full_size() const {
