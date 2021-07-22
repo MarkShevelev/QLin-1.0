@@ -75,14 +75,14 @@ namespace iki {
         T operator()(Ixs_t ... Ixs) const {
             static_assert(sizeof...(Ixs) == Dim, "Number of indexes is not equal to the array dimension");
             size_t ixs[Dim] = { Ixs... };
-            return host_memory[get_shift<Dim>(ixs, collapse)];
+            return host_memory[get_shift<Dim>(ixs, collapse.data())];
         }
 
         template<typename... Ixs_t>
         T &operator()(Ixs_t ... Ixs) {
             static_assert(sizeof...(Ixs) == Dim, "Number of indexes is not equal to the array dimension");
             size_t ixs[Dim] = { Ixs... };
-            return host_memory[get_shift<Dim>(ixs, collapse)];
+            return host_memory[get_shift<Dim>(ixs, collapse.data())];
         }
 	};
 
