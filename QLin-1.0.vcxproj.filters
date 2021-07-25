@@ -44,5 +44,8 @@
     <ClInclude Include="Solver\ThomsonSweep.cuh">
       <Filter>Solver</Filter>
     </ClInclude>
+    <ClInclude Include="Solver\Transpose.cuh">
+      <Filter>Solver</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
