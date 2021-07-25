@@ -1,4 +1,5 @@
 #include <Device/DeviceMemory.h>
+#include <Device/DeviceError.h>
 #include <Array/DeviceArray.cuh>
 
 #include <cuda_runtime.h>
