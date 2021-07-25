@@ -22,6 +22,7 @@
     <ClInclude Include="Device\Device.h" />
     <ClInclude Include="Device\DeviceError.h" />
     <ClInclude Include="Device\DeviceMemory.h" />
+    <ClInclude Include="Solver\ThomsonSweep.cuh" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DBEBB549-E582-4718-8F43-DE46F51688B0}</ProjectGuid>

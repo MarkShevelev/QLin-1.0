@@ -7,6 +7,9 @@
     <Filter Include="Device">
       <UniqueIdentifier>{3ef0c045-2148-4708-9cf3-7867d5909e70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Solver">
+      <UniqueIdentifier>{21e91ec2-e4c3-4c1d-b88a-9b1edc367c0c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Device\Device.cpp">
@@ -37,6 +40,9 @@
     </ClInclude>
     <ClInclude Include="Array\HostArray.h">
       <Filter>Array</Filter>
+    </ClInclude>
+    <ClInclude Include="Solver\ThomsonSweep.cuh">
+      <Filter>Solver</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
