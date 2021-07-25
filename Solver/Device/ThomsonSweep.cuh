@@ -12,7 +12,7 @@ namespace iki { namespace solver { namespace device {
 		iki::device::Array<T, 2u> res
 	) {
 		size_t x_idx = threadIdx.x + blockIdx.x * blockDim.x;
-		if (x_idx == 0 || x_idx >= a.shape[1] - 1) return 0;
+		if (x_idx == 0 || x_idx >= a.shape[1] - 1) return;
 
 		for (size_t y_idx = 2; y_idx != res.shape[0] - 1; ++y_idx) {
 			T w = a(y_idx, x_idx) / b(y_idx - 1, x_idx);
